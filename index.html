@@ -17,6 +17,7 @@
 		<button onclick="flip()" > Replace The Pepes </button>
 		<div id= "Grand">
 			
+			<div id = ""
 			<div class = "card-container">
 				<div class="card">
 					<img src="Pictures/pepe.jpg" class="back" />
@@ -118,12 +119,106 @@
 			</audio>
 		</div>
 		<script>
+
 			function flip() {
 				cards = document.getElementsByClassName("card");
 				for(var i=0; i< cards.length; i++){
 					cards[i].style.transform = "rotateY(180deg)";
 				}
 			}
+
+
+
+
+//READ
+/*
+Does it Work? : Yes.
+Can it be better? : Yes.
+
+To-Do kelii or me :
+-Remove PrototypeMatch() and implement User Friendly match animation.
+-Fix card layout 
+-Add 'squad' pics
+-add restart button
+-There are many things we need to fix tbh, but the aboves r #1 priority.
+
+
+
+*/
+
+
+var Card = [];
+
+//AmountOfCards = The Amount of divs
+function CardAmount(arr, amount) {
+	for (i=1; i<amount + 1; i++) {
+		arr.push(i);
+		arr.push(i);
+	}
+	return arr
+};
+
+//Fisher-Yates Shuffle
+function shuffle(arr) {
+	for (x=arr.length; x > 0; x--) {
+		var j;
+		var RandomElement = Math.floor(Math.random() * arr.length); //array element
+		j = arr[RandomElement];
+		arr[RandomElement] = arr[i];
+		arr[i] = j;
+	}
+};
+
+//Giving each divs unique IDs based on cardshuffle
+function ClassifyCard(arr) {
+				var Classify = arr.map(String);
+				cards = document.getElementsByClassName("card");
+				for(var i=0; i< cards.length; i++){
+					cards[i].id = 'cardnumber-' + Classify[i];
+					console.log("card #" + i + "has the id of " + Classify[i]);
+				}
+			}
+
+
+//TESTING ID MATCHES. PLS REMOVE WHEN READY
+function PrototypeMatch() {
+	while (cards.length != 0) {
+	var Value1 = prompt("Pick Card 1-12");
+	var Value2 = prompt("Pick another card 1-12");
+	if (cards[Value1].id === cards[Value2].id) {
+		alert("match")
+
+	} else  {
+		alert("not match");
+		console.log(cards[Value1].id + " not equal to " + cards[Value2].id );
+	};
+     }
+ }
+
+
+//because i cant use jquery :( temporarily for now
+if(window.attachEvent) {
+    window.attachEvent('onload', PrototypeMatch);
+} else {
+    if(window.onload) {
+        var curronload = window.onload;
+        var newonload = function(evt) {
+            curronload(evt);
+            PrototypeMatch(evt);
+        };
+        window.onload = newonload;
+    } else {
+        window.onload = PrototypeMatch;
+    }
+}
+
+
+
+CardAmount(Card, 6);
+shuffle(Card); //everday im shufflin
+shuffle(Card); //shuffle again
+ClassifyCard(Card); 
+
 		</script>
 	</body>
 
